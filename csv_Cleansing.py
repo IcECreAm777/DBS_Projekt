@@ -1,7 +1,7 @@
 import csv
 import json
 
-with open('countries.json', encoding='utf-8') as f:
+with open('data/countries.json', encoding='utf-8') as f:
     j = json.load(f)
     countries = []
     for row in j:
@@ -12,7 +12,7 @@ with open('countries.json', encoding='utf-8') as f:
 countries.append("Czechoslovakia".upper())
 
 
-with open('gdp.csv', newline='') as csvFile:
+with open('data/gdp.csv', newline='') as csvFile:
     reader = csv.reader(csvFile, delimiter=',')
     newCsv = []
     for row in reader:
