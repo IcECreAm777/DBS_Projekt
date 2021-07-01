@@ -6,8 +6,12 @@
 #
 
 import sqlite3
+# import csv_Cleansing
+import database_operations as db
 
 
 def main():
-    conn = sqlite3.connect('db/dbs_project.db')
-    cursor = conn.cursor()
+    db.init()
+
+
+main()
