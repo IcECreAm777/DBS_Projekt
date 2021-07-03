@@ -12,7 +12,7 @@ with open('data/countries.csv', encoding='utf-8') as f:
 # old country names
 countries.append("Czechoslovakia".upper())
 # a list of 'continents' used for filtering
-continents = {"Asia and Pacific (other)", "EU-28", "Americas (other)", "Africa", "World"}
+continents = {"Asia and Pacific (other)", "EU-28", "Americas (other)", "Africa", "OWID_WRL"}
 
 
 def getCountries():
@@ -107,7 +107,7 @@ def getTemperatureData():
         temperatures.append(float(new_csv[i][1]))
 
         if len(temperatures) == 12:
-            year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, new_csv[i][2]])
+            year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, db.getLandCodeByName(new_csv[i][2])])
             temperatures = []
 
         i += 1
@@ -141,7 +141,7 @@ def getTemperatureWorldData():
         temperatures.append(float(new_csv[i][1]))
 
         if len(temperatures) == 12:
-            year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, 'World'])
+            year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, 'OWID_WRL'])
             temperatures = []
 
         if new_csv[i][0][0:7] == '2015-12':

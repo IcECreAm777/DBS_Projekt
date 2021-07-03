@@ -101,4 +101,5 @@ def getKeyValuePair(table, value_name, country):
 
 
 def getLandCodeByName(country_name):
-    return cursor.execute("SELECT Code FROM Land WHERE Name='" + country_name + "'").fetchall()[0]
+    names = cursor.execute("SELECT Code FROM Land WHERE Name='" + country_name + "'").fetchall()
+    return names[0][0] if len(names) > 0 else ''
