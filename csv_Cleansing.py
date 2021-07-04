@@ -12,7 +12,7 @@ with open('data/countries.csv', encoding='utf-8') as f:
 # old country names
 countries.append("Czechoslovakia".upper())
 # a list of 'continents' used for filtering
-continents = {"Asia and Pacific (other)", "EU-28", "Americas (other)", "Africa", "OWID_WRL"}
+continents = {"Asia and Pacific (other)", "Europe", "EU-28", "Americas (other)", "Africa", "OWID_WRL"}
 
 
 def getCountries():
@@ -48,7 +48,6 @@ def getGdpData():
                 continue
             ordered_csv.append([1960+j, float(new_csv[row][1+j]), new_csv[row][0]])
 
-    #new_csv.pop(0)
     return ordered_csv
 
 
@@ -74,7 +73,6 @@ def getEmissionData():
                     if row[0] == 'Asia and Pacific (other)':
                         new_row[0] = 'ASAP'
             new_csv.append(new_row)
-    #new_csv.pop(0)
     return new_csv
 
 
@@ -107,7 +105,12 @@ def getTemperatureData():
         temperatures.append(float(new_csv[i][1]))
 
         if len(temperatures) == 12:
-            year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, db.getLandCodeByName(new_csv[i][2])])
+            if new_csv[i][2] == 'Europe':
+                year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, 'EU28'])
+            elif new_csv[i][2] == 'Asia':
+                year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, 'ASAP'])
+            else:
+                year_csv.append([new_csv[i][0][0:4], sum(temperatures)/12, db.getLandCodeByName(new_csv[i][2])])
             temperatures = []
 
         i += 1
@@ -161,5 +164,4 @@ def getPopulationData():
                 continue
 
             new_csv.append([row[1], row[2], db.getLandCodeByName(row[0])])
-    #new_csv.pop(0)
     return new_csv
