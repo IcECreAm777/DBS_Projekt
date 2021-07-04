@@ -1,9 +1,11 @@
 name,alpha-3,country-code
 Afghanistan,AFG,004
+Africa,AFRK,1001
 Åland Islands,ALA,248
 Albania,ALB,008
 Algeria,DZA,012
 American Samoa,ASM,016
+Americas (other),USNA,1003
 Andorra,AND,020
 Angola,AGO,024
 Anguilla,AIA,660
@@ -12,6 +14,7 @@ Antigua and Barbuda,ATG,028
 Argentina,ARG,032
 Armenia,ARM,051
 Aruba,ABW,533
+Asia and Pacific (other),ASAP,1004
 Australia,AUS,036
 Austria,AUT,040
 Azerbaijan,AZE,031
@@ -70,6 +73,7 @@ Equatorial Guinea,GNQ,226
 Eritrea,ERI,232
 Estonia,EST,233
 Eswatini,SWZ,748
+EU-28,EU28,1002
 Ethiopia,ETH,231
 Falkland Islands (Malvinas),FLK,238
 Faroe Islands,FRO,234
@@ -245,6 +249,7 @@ Virgin Islands (British),VGB,092
 Virgin Islands (U.S.),VIR,850
 Wallis and Futuna,WLF,876
 Western Sahara,ESH,732
+World,OWID_WRL,1000
 Yemen,YEM,887
 Zambia,ZMB,894
 Zimbabwe,ZWE,716

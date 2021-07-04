@@ -17,6 +17,7 @@ def init():
                              Name TEXT NOT NULL);''')
         values_to_insert_countries = csv_Cleansing.getCountries()
         cursor.executemany("INSERT INTO Land(Code, Name) VALUES (?, ?);", values_to_insert_countries)
+        conn.commit()
 
     tables = cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Temperatur'").fetchall()
     if not tables:
@@ -30,8 +31,9 @@ def init():
         values_to_insert_temperature_countries = csv_Cleansing.getTemperatureData()
         cursor.executemany("insert into Temperatur(Jahr, Durchschnittswert, land_code) VALUES (?, ?, ?);",
                            values_to_insert_temperature_world)
-        cursor.executemany("INSERT INTO Temperatur(Jahr, Durchschnittswert, land_code) VALUES (?, ?, ?);",
+        cursor.executemany("INSERT OR REPLACE INTO Temperatur(Jahr, Durchschnittswert, land_code) VALUES (?, ?, ?);",
                            values_to_insert_temperature_countries)
+        conn.commit()
 
     tables = cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='GDP'").fetchall()
     if not tables:
@@ -43,6 +45,7 @@ def init():
                         FOREIGN KEY(land_code) REFERENCES Land(Code))''')
         values_to_insert_gdp = csv_Cleansing.getGdpData()
         cursor.executemany("insert into GDP(Jahr, Wert, land_code) VALUES (?, ?, ?);", values_to_insert_gdp)
+        conn.commit()
 
     tables = cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='Einwohner'").fetchall()
     if not tables:
@@ -66,9 +69,7 @@ def init():
         values_to_insert_emission = csv_Cleansing.getEmissionData()
         cursor.executemany("insert into Emission(land_code, Jahr, Wert) VALUES (?, ?, ?);",
                            values_to_insert_emission)
-
-    # saves the data to the db to persist
-    conn.commit()
+        conn.commit()
 
 
 # closes the connection to the db
